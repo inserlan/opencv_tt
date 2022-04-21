@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <chrono>
 #include <opencv2/core.hpp>
+#include "core/matx.hpp"
 
 template <typename _Tp>
 static inline _Tp *alignPtr(_Tp *ptr, int n = (int)sizeof(_Tp))
