@@ -79,4 +79,66 @@ int main(int, char **)
 {
     cv::Mat m = (cv::Mat_<int>(3, 3) << 1, 2, 3, 4, 5, 6, 7, 8, 9);
     std::cout << m << std::endl;
+
+    tt::Matx<int, 3, 1> m1(1, 2, 3);
+    tt::Matx<int, 3, 1> m2 = {1, 2, 3};
+
+    tt::Matx<int, 3, 3> m3 = tt::Matx<int, 3, 3>::eye();
+    for (int i = 0; i < m3.rows; i++)
+    {
+        for (int j = 0; j < m3.cols; j++)
+        {
+            std::cout << m3(i, j);
+        }
+        std::cout << std::endl;
+    }
+
+    m3 = tt::Matx<int, 3, 3>::all(1);
+    for (int i = 0; i < m3.rows; i++)
+    {
+        for (int j = 0; j < m3.cols; j++)
+        {
+            std::cout << m3(i, j);
+        }
+        std::cout << std::endl;
+    }
+
+    tt::Matx<int, 3, 3>::diag_type d = { 1, 2, 3 };
+    m3 = tt::Matx<int, 3, 3>::diag(d);
+    for (int i = 0; i < m3.rows; i++)
+    {
+        for (size_t j = 0; j < m3.cols; j++)
+        {
+            std::cout << m3(i, j);
+        }
+        std::cout << std::endl;
+    }
+
+    auto row = m3.row(1);
+    for (int j = 0; j < row.cols; j++)
+    {
+        std::cout << row(0, j);
+    }
+    auto col = m3.col(0);
+    for (int j = 0; j < col.rows; j++)
+    {
+        std::cout << col(j, 0);
+    }
+    std::cout << std::endl;
+    std::cout << m3.ddot(m3) << std::endl;
+
+    auto m5 = m3.reshape<9, 1>();
+
+    auto m6 = m3.get_minor<2, 2>(1, 1);
+    for (int j = 0; j < m6.channels; j++)
+    {
+        std::cout << m6.val[j];
+    }
+    std::cout << std::endl;
+
+    auto m7 = cv::Matx<int, 10, 10>::randu(0, 20);
+    std::cout << m7 << std::endl;
+
+    auto m8 = cv::Matx<int, 10, 10>::randn(10, 1);
+    std::cout << m8 << std::endl;
 }
